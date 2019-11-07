@@ -59,6 +59,10 @@ typedef mbedtls_md_info_t digest_type_t;
 #define FS_HAVE_XCHACHA20IETF
 #endif
 
+#ifdef crypto_aead_aegis256_ABYTES
+#define FS_HAVE_AEGIS256
+#endif
+
 #define ADDRTYPE_MASK 0xF
 
 #define CRYPTO_ERROR     -2

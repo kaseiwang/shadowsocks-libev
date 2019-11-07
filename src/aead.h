@@ -25,13 +25,21 @@
 
 #include "crypto.h"
 
+enum {
+    AES128GCM = 0,
+    AES192GCM,
+    AES256GCM,
+    CHACHA20POLY1305IETF,
 // currently, XCHACHA20POLY1305IETF is not released yet
 // XCHACHA20POLY1305 is removed in upstream
 #ifdef FS_HAVE_XCHACHA20IETF
-#define AEAD_CIPHER_NUM              5
-#else
-#define AEAD_CIPHER_NUM              4
+    XCHACHA20POLY1305IETF,
 #endif
+#ifdef FS_HAVE_AEGIS256
+    AEGIS256,
+#endif
+    AEAD_CIPHER_NUM,
+};
 
 int aead_encrypt_all(buffer_t *, cipher_t *, size_t);
 int aead_decrypt_all(buffer_t *, cipher_t *, size_t);
