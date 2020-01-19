@@ -363,6 +363,12 @@ aead_cipher_ctx_init(cipher_ctx_t *cipher_ctx, int method, int enc)
         }
     }
 
+#ifdef FS_HAVE_AEGIS256
+    if (method == AEGIS256 && !crypto_aead_aegis256_is_available()) {
+        FATAL("aegis-256 is unavailable on this platform");
+    }
+#endif
+
     if (cipher == NULL) {
         LOGE("Cipher %s not found in mbed TLS library", ciphername);
         FATAL("Cannot initialize mbed TLS cipher");
